@@ -8,9 +8,13 @@ const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    createTodo(state, action) {},
+    createTodo(state, action) {
+      state.todos = [...state.todos, action.payload];
+    },
     updateTodo(state, action) {},
-    deleteTodo(state, action) {},
+    deleteTodo(state, action) {
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
+    },
   },
 });
 
