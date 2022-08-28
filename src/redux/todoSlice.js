@@ -13,6 +13,7 @@ const todoSlice = createSlice({
     },
     updateTodo(state, action) {
       state.todos = state.todos.map(todo => {
+        console.log(action.payload)
         return todo.id === action.payload.id ? action.payload : todo;
       });
     },
