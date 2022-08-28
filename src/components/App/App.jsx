@@ -15,6 +15,40 @@ export class App extends Component {
     if (todos) {
       this.setState(() => ({ todos }));
     }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const latitude = position?.coords?.latitude;
+        const longitude = position?.coords?.longitude;
+        console.log('latitude', latitude);
+        console.log('longitude', longitude);
+        const apiKey = 'd4683b09d0c94ec0aebf0b2e043decbf';
+        const urlPosition = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}&language=en`;
+
+        fetch(urlPosition)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(response.status);
+            }
+            return response.json();
+          })
+          .then(data =>
+            console.log(data.results[0].annotations.currency.iso_code)
+          );
+      });
+    }
+
+    var myHeaders = new Headers();
+    myHeaders.append('apikey', 'Bqf0jgud3HsN3E435u3LbG7qgqDyjvOj');
+
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+      headers: myHeaders,
+    };
+    fetch('https://api.apilayer.com/exchangerates_data/symbols', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   }
   componentDidUpdate(prevProps, prevState) {
     const { todos } = this.state;
@@ -40,9 +74,11 @@ export class App extends Component {
   };
 
   render() {
+    console.log(navigator);
     return (
       <>
         <Header />
+
         <Section>
           <Container>
             <SearchForm onSubmit={this.handleSubmit} />
