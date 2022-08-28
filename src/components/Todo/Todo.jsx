@@ -1,10 +1,10 @@
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { Text } from 'components';
-import { DeleteButton, TodoWrapper } from './Todo.styled';
+import { DeleteButton, TodoWrapper, UpDateButton } from './Todo.styled';
 import { useDispatch } from 'react-redux';
 import { deleteTodo, updateTodo } from 'redux/todoSlice';
 import { useState } from 'react';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 
 export const Todo = ({ text, counter, onClick, id }) => {
   const [isUpdate, setIsUpdate] = useState(false);
@@ -40,9 +40,9 @@ export const Todo = ({ text, counter, onClick, id }) => {
           <RiDeleteBinLine size={24} />
         </DeleteButton>
         {!isUpdate && (
-          <button type="button" onClick={handleUpdateTodo}>
-            Update
-          </button>
+          <UpDateButton type="button" onClick={handleUpdateTodo}>
+            UpDate
+          </UpDateButton>
         )}
 
         {isUpdate && (
