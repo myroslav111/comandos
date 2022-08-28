@@ -7,7 +7,6 @@ export const TodoWrapper = styled.div`
 
   color: ${({ theme }) => theme.colors.gray};
   box-shadow: ${({ theme }) => theme.shadows.regular};
-
   position: relative;
   width: 100%;
   height: 100%;
